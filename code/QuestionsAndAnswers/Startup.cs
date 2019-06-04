@@ -30,9 +30,12 @@ namespace QuestionsAndAnswers
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseSignalR(routes =>
             {
-                routes.MapHub<QuestionsAndAnswersHub>("/chatHub");
+                routes.MapHub<QuestionsAndAnswersHub>("/chathub");
             });
         }
     }
