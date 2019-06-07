@@ -12,7 +12,7 @@ var btnConnect = document.querySelector('#btnConnect');
 var btnDisconnect = document.querySelector('#btnDisconnect');
 var divContainer = document.querySelector("#divContainer");
 var connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chathub")
+    .withUrl("http://localhost:59207/chathub")
     .build();
 var ConnectionStarted = false;
 function getConnected() {

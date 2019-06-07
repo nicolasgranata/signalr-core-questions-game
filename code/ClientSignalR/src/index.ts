@@ -13,7 +13,7 @@ const btnDisconnect: HTMLButtonElement = document.querySelector('#btnDisconnect'
 const divContainer: HTMLDivElement = document.querySelector("#divContainer");
 
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chathub")
+    .withUrl("http://localhost:59207/chathub")
     .build();
 
 let ConnectionStarted: boolean = false;
