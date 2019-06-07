@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using QuestionsAndAnswers.Extensions;
 using QuestionsAndAnswers.Hubs;
@@ -33,13 +35,18 @@ namespace QuestionsAndAnswers
                                         .AllowAnyHeader()
                                         .WithMethods("GET","POST");
                 });
+              
+            services.AddDbContext<QnADbContext>(option =>
+            {
+                option.UseInMemoryDatabase("QnaSignalR");
+
             });
 
             services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, QnADbContext context)
         {
             app.ConfigureExceptionHandler();
 
@@ -61,6 +68,9 @@ namespace QuestionsAndAnswers
             {
                 routes.MapHub<QuestionsAndAnswersHub>(Settings.HubName);
             });
+
+            // Force database seeding to execute
+            context.Database.EnsureCreated();
         }
     }
 }

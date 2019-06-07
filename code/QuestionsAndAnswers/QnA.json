@@ -1,0 +1,50 @@
+{
+  "QuestionAnswers": [
+    {
+      "id": 1,
+      "question": "Which one is correct team name in NBA?",
+      "options": [
+        {
+          "id": 1,
+          "option": "New York Bulls"
+        },
+        {
+          "id": 2,
+          "option": "Los Angeles Kings"
+        },
+        {
+          "id": 3,
+          "option": "Golden State Warriros"
+        },
+        {
+          "id": 4,
+          "option": "Huston Rocket"
+        }
+      ],
+      "answer": 3
+    },
+    {
+      "id": 2,
+      "question": "Which one is correct team in La Liga de España?",
+      "options": [
+        {
+          "id": 1,
+          "option": "Real Madrid"
+        },
+        {
+          "id": 2,
+          "option": "Manchester United"
+        },
+        {
+          "id": 3,
+          "option": "Independiente de Avellaneda"
+        },
+        {
+          "id": 4,
+          "option": "Juventus"
+        }
+      ],
+      "answer": 4
+    }
+  ]
+}
