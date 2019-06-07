@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionsAndAnswers", "QuestionsAndAnswers\QuestionsAndAnswers.csproj", "{137F46F2-8248-4AFA-B14E-97846E04B260}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientSignalR", "ClientSignalR\ClientSignalR.csproj", "{182CEA40-B170-4CC5-999D-CF163B7A3D2D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypeScriptClient", "ClientSignalR\TypeScriptClient.csproj", "{182CEA40-B170-4CC5-999D-CF163B7A3D2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

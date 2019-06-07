@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using ClientSignalR.Models;
+using TypeScriptClient.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace ClientSignalR
+namespace TypeScriptClient
 {
     public class Startup
     {        

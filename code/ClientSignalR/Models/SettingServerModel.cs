@@ -1,4 +1,4 @@
-﻿namespace ClientSignalR.Models
+﻿namespace TypeScriptClient.Models
 {
     public class SettingServerModel
     {
