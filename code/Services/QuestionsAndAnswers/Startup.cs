@@ -7,13 +7,15 @@ using Microsoft.Extensions.DependencyInjection;
 using QuestionsAndAnswers.Extensions;
 using QuestionsAndAnswers.Hubs;
 using QuestionsAndAnswers.Models;
+using QuestionsAndAnswers.Config;
 
 namespace QuestionsAndAnswers
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public static SettingClientModel Settings { get; set; }
+
+        public static Settings Config { get; set; }
 
         public Startup(IConfiguration configuration)
         {
@@ -24,18 +26,20 @@ namespace QuestionsAndAnswers
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<SettingClientModel>(Configuration.GetSection("SettingClient"));
-            Settings = Configuration.GetSection("SettingClient").Get<SettingClientModel>();
+            services.Configure<Settings>(Configuration);
+            Config = Configuration.Get<Settings>();
+
             services.AddCors(options =>
             {
-                options.AddPolicy(Settings.CorsPolicity,
-                builder =>
+                options.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins(Settings.Uri)
-                                        .AllowAnyHeader()
-                                        .WithMethods("GET","POST");
+                    builder.WithOrigins("http://localhost:58837/")
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
                 });
-              
+            });
+
             services.AddDbContext<QnADbContext>(option =>
             {
                 option.UseInMemoryDatabase("QnaSignalR");
@@ -55,18 +59,11 @@ namespace QuestionsAndAnswers
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder =>
-            {
-                builder.WithOrigins(Settings.Uri)
-                    .AllowAnyHeader()
-                    .WithMethods("GET", "POST")
-                    .AllowCredentials();
-            });
-
+            app.UseCors("CorsPolicy");
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<QuestionsAndAnswersHub>(Settings.HubName);
+                routes.MapHub<QuestionsAndAnswersHub>(Config.HubName);
             });
 
             // Force database seeding to execute
