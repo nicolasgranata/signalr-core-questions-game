@@ -8,6 +8,7 @@ using QuestionsAndAnswers.Extensions;
 using QuestionsAndAnswers.Hubs;
 using QuestionsAndAnswers.Models;
 using QuestionsAndAnswers.Config;
+using Microsoft.AspNetCore.Mvc;
 
 namespace QuestionsAndAnswers
 {
@@ -47,6 +48,8 @@ namespace QuestionsAndAnswers
             });
 
             services.AddSignalR();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +67,13 @@ namespace QuestionsAndAnswers
             app.UseSignalR(routes =>
             {
                 routes.MapHub<QuestionsAndAnswersHub>(Config.HubName);
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=ControlPanel}/{action=Index}/{id?}");
             });
 
             // Force database seeding to execute
