@@ -7,7 +7,12 @@ namespace QuestionsAndAnswers.Hubs.Interfaces
 {
     public interface IQuestionsAndAnswersClient
     {
-        Task ReceiveQuestion(string user, string question);
+        Task ReceiveQuestion(string question);
+
         Task MessageReceived(string username, string message);
+
+        Task StartGame();
+
+        Task RestartGame();
     }
 }

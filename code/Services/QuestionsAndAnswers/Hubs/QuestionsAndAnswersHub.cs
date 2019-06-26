@@ -1,14 +1,22 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using QuestionsAndAnswers.Hubs.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace QuestionsAndAnswers.Hubs
 {
     public class QuestionsAndAnswersHub : Hub<IQuestionsAndAnswersClient>
-    {
-        public async Task NewMessage(string username, string message)
+    {       
+        public override async Task OnConnectedAsync()
         {
-            await Clients.All.MessageReceived(username, message);
+            await Groups.AddToGroupAsync(Context.ConnectionId, "usersGame");
+            await base.OnConnectedAsync();
+        }
+
+        public override async Task OnDisconnectedAsync(Exception exception)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "usersGame");
+            await base.OnDisconnectedAsync(exception);
         }
     }
 }

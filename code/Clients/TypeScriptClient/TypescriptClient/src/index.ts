@@ -22,6 +22,24 @@ connection.on("messageReceived", (username: string, message: string) => {
     divMessages.scrollTop = divMessages.scrollHeight;
 });
 
+connection.on("startGame", () => {
+    let m = document.createElement("div");
+
+    m.innerHTML = `<div class="message-author">STARTGAME</div>`;
+
+    divMessages.appendChild(m);
+    divMessages.scrollTop = divMessages.scrollHeight;
+});
+
+connection.on("receiveQuestion", (question: string) => {
+    let m = document.createElement("div");
+
+    m.innerHTML = `<div class="message-author">${question}</div>`;
+
+    divMessages.appendChild(m);
+    divMessages.scrollTop = divMessages.scrollHeight;
+});
+
 tbMessage.addEventListener("keyup", (e: KeyboardEvent) => {
     if (e.keyCode === 13) {
         send();

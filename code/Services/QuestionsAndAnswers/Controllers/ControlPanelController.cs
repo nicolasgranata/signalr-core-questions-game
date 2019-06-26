@@ -6,21 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using QuestionsAndAnswers.Hubs;
 using QuestionsAndAnswers.Hubs.Interfaces;
+using QuestionsAndAnswers.Services;
 
 namespace QuestionsAndAnswers.Controllers
 {
     public class ControlPanelController : Controller
     {
-        private readonly IHubContext<QuestionsAndAnswersHub, IQuestionsAndAnswersClient> _hubContext;
+        private readonly IControlPanelService _controlPanelService;
 
-        public ControlPanelController(IHubContext<QuestionsAndAnswersHub, IQuestionsAndAnswersClient> hubContext)
+        public ControlPanelController(IControlPanelService controlPanelService)
         {
-            _hubContext = hubContext;
+            _controlPanelService = controlPanelService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            _hubContext.Clients.All.MessageReceived("var", "message");
+            await _controlPanelService.StartGame();
             return View();
         }
     }

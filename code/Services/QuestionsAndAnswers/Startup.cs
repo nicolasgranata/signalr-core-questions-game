@@ -9,6 +9,7 @@ using QuestionsAndAnswers.Hubs;
 using QuestionsAndAnswers.Models;
 using QuestionsAndAnswers.Config;
 using Microsoft.AspNetCore.Mvc;
+using QuestionsAndAnswers.Services;
 
 namespace QuestionsAndAnswers
 {
@@ -48,6 +49,8 @@ namespace QuestionsAndAnswers
             });
 
             services.AddSignalR();
+
+            services.AddSingleton<IControlPanelService, ControlPanelService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
